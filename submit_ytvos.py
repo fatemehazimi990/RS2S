@@ -15,7 +15,7 @@ from sacred.observers import FileStorageObserver
 ex = Experiment()
 
 # where checkpoints are located 
-base_path = '../snapshots_n/' 
+base_path = 'model_path/' 
 
 # where the sacred experiment will locate
 PATH = base_path + 'submission_info/'
@@ -25,17 +25,15 @@ device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 @ex.config
 def config():
-    model_num = None
-    decoder_sig = None
+    model_name = None
     tr_conf = {
-        'model_dir': base_path + model_num,
-        'submission_dir': PATH + 'SUBMISSION_DIR_{}/'.format(model_num),
+        'model_dir': base_path + model_name,
+        'submission_dir': PATH + 'SUBMISSION_DIR_{}/'.format(model_name),
         'scores_dir': PATH + 'SCORES/',
         'rgb_dir': '/ds2/YoutubeVOS2018/valid/JPEGImages/',
         'ann_dir': '/ds2/YoutubeVOS2018/valid/Annotations/',
         'meta_dir': '/ds2/YoutubeVOS2018/valid/meta.json',
         'test_all': False,
-        'apply_sigmoid': not decoder_sig,
     }
 
 
@@ -55,7 +53,6 @@ convlstm_middle = ConvLSTMCell(input_size=(12, 25), input_dim=512,
 class Submission:
     def __init__(self, conf):
 
-        self.apply_sigmoid = conf['apply_sigmoid']
         self.model_dir = conf['model_dir']
         self.submission_dir = conf['submission_dir']
         if not os.path.exists(self.submission_dir):
@@ -126,7 +123,7 @@ class Submission:
                         decoded_img, distance_scores = decoder(h, mead_feats, h_middle, h_3)
                         temp = os.path.splitext(names[ii][0])[0]
 
-                        if self.apply_sigmoid: decoded_img = torch.sigmoid(decoded_img)
+                        decoded_img = torch.sigmoid(decoded_img)
                         np.save(save_path + temp + '_instance_%02d.npy' % int(cat), decoded_img.squeeze().cpu().numpy())
 
     def merge_score_maps(self, test_loader):
