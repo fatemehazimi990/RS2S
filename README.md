@@ -1,7 +1,13 @@
 # S2S-
-Pytorch code for Revisiting Sequence-to-Sequence Video Object Segmentation with Multi-Task Loss and Skip-Memory
+*Pytorch code for Revisiting Sequence-to-Sequence Video Object Segmentation with Multi-Task Loss and Skip-Memory*
 Dependencie:
-
+```
+numpy==1.18.1,
+sacred==0.8.1,
+torch==1.5,
+torchvision==0.6,
+tqdm
+```
 Training
 
 Download the YoutubeVOS from [here](https://competitions.codalab.org/competitions/19544#participate-get_data).
