@@ -9,7 +9,7 @@ torchvision==0.6,
 tqdm
 ```
 For training, download the YoutubeVOS from [here](https://competitions.codalab.org/competitions/19544#participate-get_data).
-Modify the data paths in train.py and run the following command.
+Modify the configurations and the paths in train.py and run the following command.
 ```
 python train.py
 ```

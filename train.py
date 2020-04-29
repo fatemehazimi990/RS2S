@@ -28,9 +28,7 @@ def config():
         'optimizer': 'Adam',
         'reduction': 'Mean',
         'lr': 1e-5,
-        'resume_train': False,
         'starting_epoch':0,
-        'train_all_epoch': '',
         'meta_train_path': '/ds2/YoutubeVOS2018/train/meta.json',
         'im_train_path': '/ds2/YoutubeVOS2018/train/JPEGImages/',
         'ann_train_path': '/ds2/YoutubeVOS2018/train/Annotations/',
@@ -146,19 +144,6 @@ def main(tr_conf):
     optimizer = torch.optim.Adam(param_list, lr=1e-5)
     optimizer.zero_grad()
     scheduler = sched.StepLR(optimizer, step_size=4, gamma=0.99)
-
-    if tr_conf['resume_train']:
-        print('Loading weights ...')
-        model_path = ''
-        c_p = torch.load(model_path)
-        initializer.load_state_dict(c_p['initializer'])
-        encoder.load_state_dict(c_p['encoder'])
-        decoder.load_state_dict(c_p['decoder'], strict=False)
-        convlstm_cell.load_state_dict(c_p['convlstm'])
-        convlstm_middle.load_state_dict(c_p['convlstm_middle'])
-        convlstm_3.load_state_dict(c_p['convlstm_3'])
-        optimizer.load_state_dict(c_p['optimizer'])
-        del c_p; torch.cuda.empty_cache()
 
     im_res = [256, 448]
     normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],
