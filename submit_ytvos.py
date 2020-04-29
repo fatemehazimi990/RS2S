@@ -15,7 +15,7 @@ from sacred.observers import FileStorageObserver
 ex = Experiment()
 
 # where checkpoints are located 
-base_path = 'model_path/' 
+base_path = 'Model/' 
 
 # where the sacred experiment will locate
 PATH = base_path + 'submission_info/'
