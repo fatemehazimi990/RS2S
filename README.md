@@ -1,5 +1,5 @@
 # S2S-
-_Pytorch code for Revisiting Sequence-to-Sequence Video Object Segmentation with Multi-Task Loss and Skip-Memory_
+_Pytorch code for Revisiting Sequence-to-Sequence Video Object Segmentation with Multi-Task Loss and Skip-Memory_ <br /> 
 Dependencie:
 ```
 numpy==1.18.1,
