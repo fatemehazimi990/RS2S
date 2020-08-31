@@ -20,3 +20,4 @@ Modify the data paths in submit_ytvos.py and run the following command.
 ```
 python submit_ytvos.py with model_name='weights.pth'
 ```
+In case of questions, please contact fatemeh.azimi@dfki.de.
